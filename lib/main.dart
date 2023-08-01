@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'item_widget.dart';
+import 'select_names_screen.dart';
 
 void main() {
   runApp(const MyApp());
