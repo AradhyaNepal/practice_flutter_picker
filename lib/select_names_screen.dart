@@ -41,6 +41,13 @@ class _SelectNamesScreenState extends State<SelectNamesScreen> {
           }
         },
         child: Scaffold(
+          floatingActionButton: const Text(
+            "Scroll Down for another page",
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+            ),
+          ),
           key: _scaffoldKey,
           body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
