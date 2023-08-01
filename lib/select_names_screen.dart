@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/picker.dart';
 
-class ItemWidget extends StatefulWidget {
-  const ItemWidget({
+class SelectNamesScreen extends StatefulWidget {
+  const SelectNamesScreen({
     super.key,
   });
 
   @override
-  State<ItemWidget> createState() => _ItemWidgetState();
+  State<SelectNamesScreen> createState() => _SelectNamesScreenState();
 }
 
-class _ItemWidgetState extends State<ItemWidget> {
+class _SelectNamesScreenState extends State<SelectNamesScreen> {
   final textFieldController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   var selectedValueController = [0, 0];
@@ -26,17 +26,15 @@ class _ItemWidgetState extends State<ItemWidget> {
     }
   ];
 
-  late final pickerHeight=MediaQuery.of(context).size.height * 0.3;
+  late final pickerHeight = MediaQuery.of(context).size.height * 0.3;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTapDown: (details) {
-        if(details.globalPosition.dy<size.height-pickerHeight){
-          if (picker != null) {
-            picker?.doConfirm(context);
-            picker = null;
-          }
+        if (details.globalPosition.dy < size.height - pickerHeight) {
+          _hidePicker(size, context);
         }
       },
       child: Scaffold(
@@ -52,8 +50,11 @@ class _ItemWidgetState extends State<ItemWidget> {
               const Text("Enter Your Name"),
               GestureDetector(
                 onTap: () {
-                  if(picker!=null)return;
-                  showPicker(context);
+                  if (picker != null) {
+                    _hidePicker(size, context);
+                  } else {
+                    showPicker(context);
+                  }
                 },
                 child: TextField(
                   controller: textFieldController,
@@ -67,6 +68,13 @@ class _ItemWidgetState extends State<ItemWidget> {
         ),
       ),
     );
+  }
+
+  void _hidePicker( Size size, BuildContext context) {
+    if (picker != null) {
+      picker?.doConfirm(context);
+      picker = null;
+    }
   }
 
   Picker? picker;
