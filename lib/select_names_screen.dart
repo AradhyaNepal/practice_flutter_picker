@@ -31,46 +31,49 @@ class _SelectNamesScreenState extends State<SelectNamesScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return GestureDetector(
-      onTapDown: (details) {
-        if (details.globalPosition.dy < size.height - pickerHeight) {
-          _hidePicker(size, context);
-        }
-      },
-      child: Scaffold(
-        key: _scaffoldKey,
-        body: Container(
-          padding: const EdgeInsets.all(10),
-          height: size.height,
-          width: size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text("Enter Your Name"),
-              GestureDetector(
-                onTap: () {
-                  if (picker != null) {
-                    _hidePicker(size, context);
-                  } else {
-                    showPicker(context);
-                  }
-                },
-                child: TextField(
-                  controller: textFieldController,
-                  enabled: false,
-                  decoration:
-                      const InputDecoration(labelText: "Name with fav letter"),
-                ),
-              )
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: GestureDetector(
+        onTapDown: (details) {
+          if (details.globalPosition.dy < size.height - pickerHeight) {
+            _hidePicker(size, context);
+          }
+        },
+        child: Scaffold(
+          key: _scaffoldKey,
+          body: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            height: size.height,
+            width: size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text("Enter Your Name"),
+                GestureDetector(
+                  onTap: () {
+                    if (picker != null) {
+                      _hidePicker(size, context);
+                    } else {
+                      showPicker(context);
+                    }
+                  },
+                  child: TextField(
+                    controller: textFieldController,
+                    enabled: false,
+                    decoration: const InputDecoration(
+                        labelText: "Name with fav letter"),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  void _hidePicker( Size size, BuildContext context) {
+  void _hidePicker(Size size, BuildContext context) {
     if (picker != null) {
       picker?.doConfirm(context);
       picker = null;
