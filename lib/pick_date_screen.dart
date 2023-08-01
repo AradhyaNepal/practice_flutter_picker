@@ -49,7 +49,9 @@ class _PickDateScreenState extends State<PickDateScreen> {
   int get selectedDay=>selectedValueController[1]+1;
 
   String get ageResult{
-    return AgeCalculator.age(selectedBirthDay).toString();
+    final age=AgeCalculator.age(selectedBirthDay);
+    bool ageLimitUnsatisfied=age.years<minimumAgeLimit;
+    return age.toString()+(ageLimitUnsatisfied?"\n\n\nOops! Your age limit is not satisfied to use this app":"");
   }
 
   @override
@@ -91,7 +93,7 @@ class _PickDateScreenState extends State<PickDateScreen> {
                   height: 20,
                 ),
                 Text(
-                  "Your age is\n$ageResult",
+                  "Your age is\n\n$ageResult",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 18,
