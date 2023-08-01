@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/picker.dart';
+import 'package:practice_flutter_picker/widgets/custom_selection.dart';
 
 class SelectNamesScreen extends StatefulWidget {
   const SelectNamesScreen({
@@ -94,13 +95,7 @@ class _SelectNamesScreenState extends State<SelectNamesScreen> {
         ),
         hideHeader: true,
         selecteds: selectedValueController,
-        selectionOverlay: Container(
-          decoration: const BoxDecoration(
-              color: Colors.transparent,
-              border: Border(
-                  top: BorderSide(color: Colors.green, width: 1),
-                  bottom: BorderSide(color: Colors.green, width: 1))),
-        ),
+        selectionOverlay: const CustomSelector(),
         adapter: PickerDataAdapter<String>(pickerData: selectNameData),
         textAlign: TextAlign.left,
         onConfirm: (Picker picker, List value) {
